@@ -15,14 +15,3 @@ class Scraper:
         response = self.get()
         text = response.text
         return text
-
-    def getJsonResponse(self):
-        response = self.get()
-        json = response.json()
-        return json
-
-    def getAutoResponse(self):
-        try:
-            return self.getJsonResponse()
-        except JSONDecodeError:
-            return self.getTextResponse()

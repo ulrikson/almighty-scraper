@@ -1,10 +1,16 @@
-from Scraper import Scraper
+from bs4 import BeautifulSoup
 
 
-class HtmlParser(Scraper):
-    def __init__(self, url, headers):
-        Scraper.__init__(self, url, headers)
+class HtmlParser:
+    def __init__(self, html):
+        self.html = html
 
-    def clean(self):
-        html = Scraper.getTextResponse(self)
-        return html
+    def extract(self):
+        file = open(self.html)
+        content = file.read()
+        soup = BeautifulSoup(content, 'html.parser')
+        return soup
+
+        # find top level tag --> create "level"
+        # All its children --> new "levels"
+        # All their childrem --> levels of that level
