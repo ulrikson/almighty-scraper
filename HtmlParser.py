@@ -12,10 +12,16 @@ class HtmlParser:
         cleanHtml = BeautifulSoup(content, "html.parser")
         return cleanHtml
     
+    def getTextRelatedTags(self):
+        headerTags = [f'h{x}' for x in range(1,7)]
+        otherTextTags = ['p']
+        allTags = headerTags + otherTextTags
+        return allTags
+    
     def getAllText(self):
         html = self.extractHtml()
-        text = re.sub("[\t\n]", " ", html.text)
-        return text
+        textTags = html.find_all(self.getTextRelatedTags())
+        return textTags
     
     def test(self):
         return self.getAllText()
