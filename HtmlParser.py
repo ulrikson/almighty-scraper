@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from Scraper import Scraper
+import re
 
 
 class HtmlParser:
@@ -10,11 +11,11 @@ class HtmlParser:
         content = Scraper.getContent(self)
         cleanHtml = BeautifulSoup(content, "html.parser")
         return cleanHtml
-
+    
     def getAllText(self):
         html = self.extractHtml()
-        text = html.text
-        return text.split("\n");
-
+        text = re.sub("[\t\n]", " ", html.text)
+        return text
+    
     def test(self):
         return self.getAllText()
