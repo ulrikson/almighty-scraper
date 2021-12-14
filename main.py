@@ -1,7 +1,7 @@
 from HtmlParser import HtmlParser
 
-# For testing purposes
-html = "test.html"
+url = "https://dn.se/om/klimatet"
+headers = None
+html = HtmlParser(url, headers)
 
-test = HtmlParser(html).extract()
-print(test)
+print(html.getAllText())

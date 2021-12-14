@@ -7,11 +7,6 @@ class Scraper:
         self.url = url
         self.headers = headers
 
-    def get(self):
+    def getContent(self):
         response = requests.get(self.url, self.headers)
-        return response
-
-    def getTextResponse(self):
-        response = self.get()
-        text = response.text
-        return text
+        return response.content
