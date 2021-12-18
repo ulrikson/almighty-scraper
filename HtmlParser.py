@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from Scraper import Scraper
 import yake
+from rake_nltk import Rake
 
 
 class HtmlParser:
@@ -24,7 +25,9 @@ class HtmlParser:
         text = [tag.text for tag in textTags]
         return " ".join(text)
 
-    def generateKeyWords(self):
+
+    # TODO: THE ML Stuff should be moved to separate class
+    def generateKeyWordsYake(self):
         text = self.getAllText()
         deduplicationThreshold = 0.9
         language = "en"
@@ -38,7 +41,15 @@ class HtmlParser:
         keywords = keywordExtractor.extract_keywords(text)
 
         return keywords
+    
+    def generateKeywordsRake(self):
+        text = self.getAllText()
+        rake = Rake()
+        rake.extract_keywords_from_text(text)
+        keywords = rake.get_ranked_phrases()
+        return keywords[:10]
+        
 
     def test(self):
         print(self.getAllText())
-        return self.generateKeyWords()
+        return self.generateKeywordsRake()
