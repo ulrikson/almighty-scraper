@@ -27,7 +27,7 @@ class HtmlParser:
     def generateKeyWords(self):
         text = self.getAllText()
         deduplicationThreshold = 0.9
-        language = "sv"
+        language = "en"
         maxLengthOfKeyword = 2
         numOfKeywords = 10
         features = None
@@ -40,4 +40,5 @@ class HtmlParser:
         return keywords
 
     def test(self):
+        print(self.getAllText())
         return self.generateKeyWords()
